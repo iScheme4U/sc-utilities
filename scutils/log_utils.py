@@ -28,8 +28,8 @@ from .file_utils import ensure_dir
 
 # default log level: INFO
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO').upper()
-# default log file path: ~/logs/sc-sys.log
-LOG_FILE_NAME = os.environ.get('LOG_FILE_NAME', os.path.join(os.path.expanduser('~'), 'logs/sc-sys.log'))
+# default log file path: /tmp/logs/sc-sys.log
+LOG_FILE_NAME = os.environ.get('LOG_FILE_NAME', '/tmp/logs/sc-sys.log')
 # default log format
 LOG_FORMAT = os.environ.get('LOG_FORMAT', '%(asctime)s [%(levelname)s][%(name)s]: %(message)s')
 
