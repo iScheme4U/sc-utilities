@@ -26,15 +26,6 @@ Dependencies
 
 None
 
-Changes
--------
-
-Version 0.0.2
-    * Change default log file location
-
-Version 0.0.1
-    * Initial version
-
 License
 -------
 
