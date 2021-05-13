@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.0.4
+-----------------
+
+    - Change default log file location
+
 v0.0.3
 -----------------
 
