@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.0.5
+-----------------
+
+    - If logger already has handlers, do not add more handlers
+
 v0.0.4
 -----------------
 

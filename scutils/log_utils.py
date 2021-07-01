@@ -41,6 +41,9 @@ def log_init():
     """
     ensure_dir(LOG_FILE_NAME)
     root_logger = logging.getLogger()
+    if root_logger.hasHandlers():
+        # already has handlers, do not add more handlers
+        return
     root_logger.setLevel(LOG_LEVEL)
     file_handler = TimedRotatingFileHandler(LOG_FILE_NAME, when='D', interval=1, backupCount=32)
     formatter = logging.Formatter(LOG_FORMAT)
