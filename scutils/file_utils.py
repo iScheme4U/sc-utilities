@@ -22,7 +22,7 @@
 import os
 
 
-def ensure_dir(file_path):
+def ensure_dir(file_path: str) -> None:
     """Ensure a directory must exist, if not then it will be created"""
     directory = os.path.dirname(file_path)
     if not os.path.exists(directory):

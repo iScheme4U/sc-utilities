@@ -20,14 +20,14 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-from .file_utils import ensure_dir
-from .log_utils import log_init
-from .singleton import Singleton
-
-__version__ = "0.0.5"
-
 __all__ = {
     "ensure_dir",
     "log_init",
     "Singleton",
 }
+
+from .file_utils import ensure_dir
+from .log_utils import log_init
+from .singleton import Singleton
+
+__version__ = "0.0.6"

@@ -36,7 +36,8 @@ class SingletonTestCase(unittest.TestCase):
 
     @staticmethod
     def setUpClass() -> None:
-        log_init()
+        logger = log_init()
+        logging.getLogger(__name__).info("logger %s", logger)
 
     def test_singleton(self):
         test_a = Test()

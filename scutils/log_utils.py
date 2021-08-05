@@ -34,7 +34,7 @@ LOG_FILE_NAME = os.environ.get('LOG_FILE_NAME', 'logs/sc-sys.log')
 LOG_FORMAT = os.environ.get('LOG_FORMAT', '%(asctime)s [%(levelname)s][%(name)s]: %(message)s')
 
 
-def log_init():
+def log_init() -> logging.Logger:
     """Initialize logging configurations
 
     A new log file will be created everyday, log files will be saved for 32 days
@@ -43,7 +43,7 @@ def log_init():
     root_logger = logging.getLogger()
     if root_logger.hasHandlers():
         # already has handlers, do not add more handlers
-        return
+        return root_logger
     root_logger.setLevel(LOG_LEVEL)
     file_handler = TimedRotatingFileHandler(LOG_FILE_NAME, when='D', interval=1, backupCount=32)
     formatter = logging.Formatter(LOG_FORMAT)
@@ -52,3 +52,4 @@ def log_init():
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(formatter)
     root_logger.addHandler(console_handler)
+    return root_logger

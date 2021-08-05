@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.0.6
+-----------------
+
+    - Add return value to log_init()
+
 v0.0.5
 -----------------
 
