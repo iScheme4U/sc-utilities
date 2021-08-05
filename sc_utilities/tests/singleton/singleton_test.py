@@ -23,8 +23,8 @@
 import logging
 import unittest
 
-from scutils import log_init
-from scutils.singleton import Singleton
+from sc_utilities import log_init
+from sc_utilities.singleton import Singleton
 
 
 class Test(metaclass=Singleton):

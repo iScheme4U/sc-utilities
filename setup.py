@@ -44,7 +44,7 @@ with open('README.rst', encoding="utf-8") as fd:
 
 setup(
     name='sc-utilities',
-    version=get_version("scutils/__init__.py"),
+    version=get_version("sc_utilities/__init__.py"),
     url='https://github.com/Scott-Lau/sc-utilities',
     packages=find_packages(),
     author='Scott Lau',

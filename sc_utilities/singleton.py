@@ -28,7 +28,7 @@ class Singleton(type):
 
     import unittest
 
-    from scutils import Singleton
+    from sc_utilities import Singleton
 
 
     class Test(metaclass=Singleton):

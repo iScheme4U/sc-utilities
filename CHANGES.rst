@@ -5,6 +5,7 @@ v0.0.6
 -----------------
 
     - Add return value to log_init()
+    - rename package
 
 v0.0.5
 -----------------
