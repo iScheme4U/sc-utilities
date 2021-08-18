@@ -23,7 +23,7 @@
 import logging
 import unittest
 
-from sc_utilities import log_init
+from sc_utilities import log_init, log_wrapper
 from sc_utilities.singleton import Singleton
 
 
@@ -39,6 +39,7 @@ class SingletonTestCase(unittest.TestCase):
         logger = log_init()
         logging.getLogger(__name__).info("logger %s", logger)
 
+    @log_wrapper
     def test_singleton(self):
         test_a = Test()
         test_b = Test()

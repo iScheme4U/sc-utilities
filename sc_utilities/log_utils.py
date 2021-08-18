@@ -22,6 +22,8 @@
 import logging
 import os
 import sys
+import time
+from functools import wraps
 from logging.handlers import TimedRotatingFileHandler
 
 from .file_utils import ensure_dir
@@ -53,3 +55,25 @@ def log_init() -> logging.Logger:
     console_handler.setFormatter(formatter)
     root_logger.addHandler(console_handler)
     return root_logger
+
+
+def log_wrapper(func):
+    """
+    Add log before and after function call, and log used time.
+    """
+
+    @wraps(func)
+    def _wrapper(*args, **kwargs):
+        """
+        Add log before and after function call, and log used time.
+        """
+        func_name = func.__name__
+        logging.getLogger(__name__).info(f"start to call {func_name}")
+        start = time.time()
+        res = func(*args, **kwargs)
+        end = time.time()
+        used_time = end - start
+        logging.getLogger(__name__).info(f"{func_name} ended, time used {round(used_time, 3)}")
+        return res
+
+    return _wrapper

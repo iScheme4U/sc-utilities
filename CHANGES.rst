@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.0.7
+-----------------
+
+    - Add log_wrapper decorator
+
 v0.0.6
 -----------------
 

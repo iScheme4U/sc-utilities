@@ -23,11 +23,12 @@
 __all__ = {
     "ensure_dir",
     "log_init",
+    "log_wrapper",
     "Singleton",
 }
 
 from .file_utils import ensure_dir
-from .log_utils import log_init
+from .log_utils import log_init, log_wrapper
 from .singleton import Singleton
 
-__version__ = "0.0.6"
+__version__ = "0.0.7"
