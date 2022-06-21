@@ -1,6 +1,6 @@
 #  The MIT License (MIT)
 #
-#  Copyright (c) 2021. Scott Lau
+#  Copyright (c) 2022. Scott Lau
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -20,17 +20,28 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-__all__ = {
-    "ensure_dir",
-    "log_init",
-    "log_wrapper",
-    "Singleton",
-    "calculate_column_index",
-}
 
-from .file_utils import ensure_dir
-from .log_utils import log_init, log_wrapper
-from .singleton import Singleton
-from .excel_utils import calculate_column_index
+def calculate_column_index(column_letter: str) -> int:
+    if column_letter is None or len(column_letter) == 0:
+        return -1
+    # 转换为大写
+    column_name = column_letter.upper()
+    column_letter_stack = list()
+    ASCII_A = ord('A')
+    ASCII_Z = ord('Z')
+    # 将字母序列转换为栈式结构
+    for letter in column_name:
+        column_letter_stack.append(ord(letter) - ASCII_A + 1)
 
-__version__ = "0.0.8"
+    # 最后结果
+    result = 0
+    # 当前是第几位，1是个位、2是十位、3是百位，依此类推
+    level = 1
+    # 代表是26进制
+    ordinal = ASCII_Z - ASCII_A + 1
+    while len(column_letter_stack) > 0:
+        ascii_value = column_letter_stack.pop()
+        result += ascii_value * level
+        # 每进一次，乘以进制数字
+        level = level * ordinal
+    return result

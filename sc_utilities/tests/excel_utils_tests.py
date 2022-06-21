@@ -1,6 +1,6 @@
 #  The MIT License (MIT)
 #
-#  Copyright (c) 2021. Scott Lau
+#  Copyright (c) 2022. Scott Lau
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -20,17 +20,18 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-__all__ = {
-    "ensure_dir",
-    "log_init",
-    "log_wrapper",
-    "Singleton",
-    "calculate_column_index",
-}
+import unittest
+from sc_utilities import calculate_column_index
 
-from .file_utils import ensure_dir
-from .log_utils import log_init, log_wrapper
-from .singleton import Singleton
-from .excel_utils import calculate_column_index
 
-__version__ = "0.0.8"
+class ExcelTestCase(unittest.TestCase):
+    def test_calculator(self):
+        self.assertEqual(1, calculate_column_index('A'))
+        self.assertEqual(26, calculate_column_index('Z'))
+        self.assertEqual(27, calculate_column_index('AA'))
+        self.assertEqual(702, calculate_column_index('ZZ'))
+        self.assertEqual(703, calculate_column_index('AAA'))
+
+
+if __name__ == '__main__':
+    unittest.main()
