@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.0.11 (20220623)
+-----------------
+
+- fix calculate_column_name_from_index bug
+
 v0.0.10 (20220623)
 -----------------
 

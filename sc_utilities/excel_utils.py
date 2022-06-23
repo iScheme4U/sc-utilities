@@ -68,4 +68,5 @@ def calculate_column_name_from_index(index: int) -> str:
             div -= 1
             mod += ORDINAL_VALUE
         result.append(chr(ASCII_A + mod - 1))
+    result.reverse()
     return "".join(result)
