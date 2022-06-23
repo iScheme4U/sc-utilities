@@ -21,6 +21,10 @@
 #  SOFTWARE.
 import re
 
+ASCII_A = ord('A')
+ASCII_Z = ord('Z')
+# 代表是26进制
+ORDINAL_VALUE = ASCII_Z - ASCII_A + 1
 
 def calculate_column_index(column_letter: str) -> int:
     if column_letter is None or type(column_letter) != str or len(column_letter) == 0:
@@ -31,8 +35,6 @@ def calculate_column_index(column_letter: str) -> int:
     # 转换为大写
     column_name = column_letter.upper()
     column_letter_stack = list()
-    ASCII_A = ord('A')
-    ASCII_Z = ord('Z')
     # 将字母序列转换为栈式结构
     for letter in column_name:
         column_letter_stack.append(ord(letter) - ASCII_A + 1)
@@ -41,11 +43,29 @@ def calculate_column_index(column_letter: str) -> int:
     result = 0
     # 当前是第几位，1是个位、2是十位、3是百位，依此类推
     level = 1
-    # 代表是26进制
-    ordinal = ASCII_Z - ASCII_A + 1
     while len(column_letter_stack) > 0:
         ascii_value = column_letter_stack.pop()
         result += ascii_value * level
         # 每进一次，乘以进制数字
-        level = level * ordinal
+        level = level * ORDINAL_VALUE
     return result - 1
+
+
+def calculate_column_name_from_index(index: int) -> str:
+    if index is None or type(index) != int or index < 0:
+        raise ValueError("parameter index is invalid")
+    value = index + 1
+    result = list()
+    div, mod = divmod(value, ORDINAL_VALUE)
+    if mod == 0:
+        div -= 1
+        mod += ORDINAL_VALUE
+    result.append(chr(ASCII_A + mod - 1))
+    while div != 0:
+        value = div
+        div, mod = divmod(value, ORDINAL_VALUE)
+        if mod == 0:
+            div -= 1
+            mod += ORDINAL_VALUE
+        result.append(chr(ASCII_A + mod - 1))
+    return "".join(result)

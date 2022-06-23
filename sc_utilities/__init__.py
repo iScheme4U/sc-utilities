@@ -26,13 +26,14 @@ __all__ = {
     "log_wrapper",
     "Singleton",
     "calculate_column_index",
+    "calculate_column_name_from_index",
     "SCException",
 }
 
 from .file_utils import ensure_dir
 from .log_utils import log_init, log_wrapper
 from .singleton import Singleton
-from .excel_utils import calculate_column_index
+from .excel_utils import calculate_column_index, calculate_column_name_from_index
 from .exceptions import *
 
-__version__ = "0.0.9"
+__version__ = "0.0.10"
