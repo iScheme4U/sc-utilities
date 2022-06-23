@@ -26,11 +26,11 @@ from sc_utilities import calculate_column_index
 
 class ExcelTestCase(unittest.TestCase):
     def test_calculator(self):
-        self.assertEqual(1, calculate_column_index('A'))
-        self.assertEqual(26, calculate_column_index('Z'))
-        self.assertEqual(27, calculate_column_index('AA'))
-        self.assertEqual(702, calculate_column_index('ZZ'))
-        self.assertEqual(703, calculate_column_index('AAA'))
+        self.assertEqual(0, calculate_column_index('A'))
+        self.assertEqual(25, calculate_column_index('Z'))
+        self.assertEqual(26, calculate_column_index('AA'))
+        self.assertEqual(701, calculate_column_index('ZZ'))
+        self.assertEqual(702, calculate_column_index('AAA'))
 
 
 if __name__ == '__main__':
