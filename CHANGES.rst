@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v0.0.9 (20220623)
+-----------------
+
+- optimize calculate_column_index
+- add SCException
+
 v0.0.8 (20220621)
 -----------------
 

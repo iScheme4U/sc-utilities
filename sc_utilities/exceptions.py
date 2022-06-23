@@ -1,6 +1,6 @@
 #  The MIT License (MIT)
 #
-#  Copyright (c) 2021. Scott Lau
+#  Copyright (c) 2022. Scott Lau
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -20,19 +20,7 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-__all__ = {
-    "ensure_dir",
-    "log_init",
-    "log_wrapper",
-    "Singleton",
-    "calculate_column_index",
-    "SCException",
-}
 
-from .file_utils import ensure_dir
-from .log_utils import log_init, log_wrapper
-from .singleton import Singleton
-from .excel_utils import calculate_column_index
-from .exceptions import *
-
-__version__ = "0.0.9"
+class SCException(Exception):
+    """Unexpected response from http service."""
+    pass

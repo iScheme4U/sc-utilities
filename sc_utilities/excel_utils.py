@@ -19,11 +19,15 @@
 #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
+import re
 
 
 def calculate_column_index(column_letter: str) -> int:
-    if column_letter is None or len(column_letter) == 0:
-        return -1
+    if column_letter is None or type(column_letter) != str or len(column_letter) == 0:
+        raise ValueError("parameter column_letter is invalid")
+
+    if re.match(r'^[a-zA-Z]+$', column_letter) is None:
+        raise ValueError("parameter column_letter contains invalid characters")
     # 转换为大写
     column_name = column_letter.upper()
     column_letter_stack = list()
@@ -44,4 +48,4 @@ def calculate_column_index(column_letter: str) -> int:
         result += ascii_value * level
         # 每进一次，乘以进制数字
         level = level * ordinal
-    return result
+    return result - 1
