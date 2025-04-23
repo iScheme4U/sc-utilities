@@ -1,6 +1,6 @@
 #  The MIT License (MIT)
 #
-#  Copyright (c) 2025  Scott Lau
+#  Copyright (c) 2025 Scott Lau
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -20,39 +20,20 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
+import unittest
 
-class Singleton(type):
-    """A Singleton using metaclass
-
-    Sample class:
-
-    import unittest
-
-    from sc_utilities import Singleton
+from sc_utilities import log_init, Config
 
 
-    class Test(metaclass=Singleton):
-        def __init__(self):
-            print("Test __init__ called")
+class ConfigTestCase(unittest.TestCase):
+
+    def test_create_config(self):
+        config = Config()
+        self.assertIsNotNone(config)
+        environment = config.get("environment")
+        self.assertEqual(environment, 'production')
 
 
-    class SingletonTestCase(unittest.TestCase):
-        def test_singleton(self):
-            test_a = Test()
-            test_b = Test()
-            print(test_a)
-            print(test_b)
-            self.assertEqual(test_a, test_b)
-
-    Sample output:
-    Test __init__ called
-    <singleton_test.Test object at 0x7fea09d650d0>
-    <singleton_test.Test object at 0x7fea09d650d0>
-    """
-
-    _instances = {}
-
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
-        return cls._instances[cls]
+if __name__ == '__main__':
+    log_init()
+    unittest.main()

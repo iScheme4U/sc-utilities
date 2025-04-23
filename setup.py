@@ -1,6 +1,6 @@
 #  The MIT License (MIT)
 #
-#  Copyright (c) 2021. Scott Lau
+#  Copyright (c) 2025  Scott Lau
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -58,14 +58,16 @@ setup(
     ),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
-        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Operating System :: OS Independent",
         'Topic :: Software Development',
         'Topic :: Utilities',
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.8',
+    install_requires=[
+        'PyYAML==6.0.2',
+    ],
 )

@@ -1,6 +1,6 @@
 #  The MIT License (MIT)
 #
-#  Copyright (c) 2025  Scott Lau
+#  Copyright (c) 2025. Scott Lau
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -19,40 +19,34 @@
 #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
+import os
+
+import yaml
 
 
-class Singleton(type):
-    """A Singleton using metaclass
+class Config:
+    ENCODING = "utf-8"
 
-    Sample class:
+    def __init__(self, path="production.yml"):
+        self._config_path = path
+        self._config: dict = dict()
+        print("xxx", os.path.abspath(os.curdir))
+        with open(self._config_path, "r", encoding=Config.ENCODING) as f:
+            self._config.update(yaml.load(f, Loader=yaml.FullLoader))
 
-    import unittest
+    def get(self, path: str, default=None):
+        keys = path.split(".")
+        value = self._config
+        for key in keys:
+            if isinstance(value, dict):
+                value = value.get(key)
+            else:
+                return default
+        return value if value is not None else default
 
-    from sc_utilities import Singleton
+    def save(self):
+        with open(self._config_path, "w", encoding=Config.ENCODING) as f:
+            yaml.dump(self._config, f, allow_unicode=True, sort_keys=False)
 
-
-    class Test(metaclass=Singleton):
-        def __init__(self):
-            print("Test __init__ called")
-
-
-    class SingletonTestCase(unittest.TestCase):
-        def test_singleton(self):
-            test_a = Test()
-            test_b = Test()
-            print(test_a)
-            print(test_b)
-            self.assertEqual(test_a, test_b)
-
-    Sample output:
-    Test __init__ called
-    <singleton_test.Test object at 0x7fea09d650d0>
-    <singleton_test.Test object at 0x7fea09d650d0>
-    """
-
-    _instances = {}
-
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
-        return cls._instances[cls]
+    def __repr__(self):
+        return str(self._config)

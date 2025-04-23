@@ -16,16 +16,6 @@ It is possible to install the tool with `pip`::
 
     pip install sc-utilities
 
-Configuration
--------------
-
-None
-
-Dependencies
-------------
-
-None
-
 License
 -------
 
