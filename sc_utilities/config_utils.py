@@ -30,7 +30,6 @@ class Config:
     def __init__(self, path="production.yml"):
         self._config_path = path
         self._config: dict = dict()
-        print("xxx", os.path.abspath(os.curdir))
         with open(self._config_path, "r", encoding=Config.ENCODING) as f:
             self._config.update(yaml.load(f, Loader=yaml.FullLoader))
 
