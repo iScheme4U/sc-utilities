@@ -24,6 +24,17 @@ import os
 import yaml
 
 
+def chain_get(src: dict, path: str, default=None):
+    keys = path.split(".")
+    value = src
+    for key in keys:
+        if isinstance(value, dict):
+            value = value.get(key)
+        else:
+            return default
+    return value if value is not None else default
+
+
 class Config:
     ENCODING = "utf-8"
 
@@ -34,14 +45,7 @@ class Config:
             self._config.update(yaml.load(f, Loader=yaml.FullLoader))
 
     def get(self, path: str, default=None):
-        keys = path.split(".")
-        value = self._config
-        for key in keys:
-            if isinstance(value, dict):
-                value = value.get(key)
-            else:
-                return default
-        return value if value is not None else default
+        return chain_get(self._config, path, default)
 
     def save(self):
         with open(self._config_path, "w", encoding=Config.ENCODING) as f:
