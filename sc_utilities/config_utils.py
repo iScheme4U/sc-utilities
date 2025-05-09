@@ -19,9 +19,10 @@
 #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
-import os
 
 import yaml
+
+from excel_utils import calculate_column_index
 
 
 def chain_get(src: dict, path: str, default=None):
@@ -37,8 +38,9 @@ def chain_get(src: dict, path: str, default=None):
 
 class Config:
     ENCODING = "utf-8"
+    DEFAULT_CONFIG_PATH = "production.yml"
 
-    def __init__(self, path="production.yml"):
+    def __init__(self, path=DEFAULT_CONFIG_PATH):
         self._config_path = path
         self._config: dict = dict()
         with open(self._config_path, "r", encoding=Config.ENCODING) as f:
@@ -46,6 +48,13 @@ class Config:
 
     def get(self, path: str, default=None):
         return chain_get(self._config, path, default)
+
+    def get_column_index(self, key: str) -> int:
+        """
+        从配置计算列索引
+        """
+        config = self._config.get(key)
+        return calculate_column_index(config)
 
     def save(self):
         with open(self._config_path, "w", encoding=Config.ENCODING) as f:

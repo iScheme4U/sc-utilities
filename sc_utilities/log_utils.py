@@ -21,16 +21,18 @@
 #  SOFTWARE.
 import logging
 import os
+import queue
 import sys
 import time
 from functools import wraps
+from logging.handlers import QueueHandler
 from logging.handlers import TimedRotatingFileHandler
 
 from .file_utils import ensure_dir
 
 # default log level: INFO
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO').upper()
-# default log file path: /tmp/logs/sc-sys.log
+# default log file path: logs/sc-sys.log
 LOG_FILE_NAME = os.environ.get('LOG_FILE_NAME', 'logs/sc-sys.log')
 # default log format
 LOG_FORMAT = os.environ.get('LOG_FORMAT', '%(asctime)s [%(levelname)s][%(name)s]: %(message)s')
@@ -39,7 +41,7 @@ LOG_FORMAT = os.environ.get('LOG_FORMAT', '%(asctime)s [%(levelname)s][%(name)s]
 def log_init() -> logging.Logger:
     """Initialize logging configurations
 
-    A new log file will be created everyday, log files will be saved for 32 days
+    A new log file will be created every day, log files will be saved for 32 days
     """
     ensure_dir(LOG_FILE_NAME)
     root_logger = logging.getLogger()
@@ -77,3 +79,18 @@ def log_wrapper(func):
         return res
 
     return _wrapper
+
+
+class SmartQueueHandler(QueueHandler):
+    """智能队列处理器，队列满时丢弃最老日志"""
+
+    def emit(self, record):
+        try:
+            if self.queue.full():
+                try:
+                    self.queue.get_nowait()  # 丢弃最老的日志
+                except queue.Empty:
+                    pass
+            self.queue.put_nowait(record)
+        except Exception:
+            self.handleError(record)

@@ -28,10 +28,10 @@ ORDINAL_VALUE = ASCII_Z - ASCII_A + 1
 
 def calculate_column_index(column_letter: str) -> int:
     if column_letter is None or type(column_letter) != str or len(column_letter) == 0:
-        raise ValueError("parameter column_letter is invalid")
+        raise ValueError(f"parameter {column_letter} is invalid")
 
     if re.match(r'^[a-zA-Z]+$', column_letter) is None:
-        raise ValueError("parameter column_letter contains invalid characters")
+        raise ValueError(f"parameter {column_letter} contains invalid characters")
     # 转换为大写
     column_name = column_letter.upper()
     column_letter_stack = list()
@@ -53,7 +53,7 @@ def calculate_column_index(column_letter: str) -> int:
 
 def calculate_column_name_from_index(index: int) -> str:
     if index is None or type(index) != int or index < 0:
-        raise ValueError("parameter index is invalid")
+        raise ValueError(f"parameter {index} is invalid")
     value = index + 1
     result = list()
     div, mod = divmod(value, ORDINAL_VALUE)
