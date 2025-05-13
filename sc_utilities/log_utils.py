@@ -28,7 +28,7 @@ from functools import wraps
 from logging.handlers import QueueHandler
 from logging.handlers import TimedRotatingFileHandler
 
-from .file_utils import ensure_dir
+from sc_utilities.file_utils import ensure_dir
 
 # default log level: INFO
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO').upper()

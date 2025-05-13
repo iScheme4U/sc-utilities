@@ -22,7 +22,7 @@
 
 import yaml
 
-from excel_utils import calculate_column_index
+from sc_utilities.excel_utils import calculate_column_index
 
 
 def chain_get(src: dict, path: str, default=None):

@@ -32,11 +32,11 @@ __all__ = {
     "chain_get",
 }
 
-from .config_utils import Config, chain_get
-from .file_utils import ensure_dir
-from .log_utils import log_init, log_wrapper
-from .singleton import Singleton
-from .excel_utils import calculate_column_index, calculate_column_name_from_index
-from .exceptions import *
+from sc_utilities.config_utils import Config, chain_get
+from sc_utilities.excel_utils import calculate_column_index, calculate_column_name_from_index
+from sc_utilities.exceptions import *
+from sc_utilities.file_utils import ensure_dir
+from sc_utilities.log_utils import log_init, log_wrapper
+from sc_utilities.singleton import Singleton
 
-__version__ = "0.0.15"
+__version__ = "0.0.16"
